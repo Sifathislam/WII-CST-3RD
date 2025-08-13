@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Institute Of Engineering And Technology (NIET)</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        scroll-behavior: smooth;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2c5aa0;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #2c5aa0;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .mobile-menu span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 95vh;
+        background: linear-gradient(
+            rgba(44, 90, 160, 0.7),
+            rgba(44, 90, 160, 0.7)
+          ),
+          url("528302675_630839466730263_2388505689092638308_n.jpg"),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f4f8" width="1200" height="600"/><rect fill="%232c5aa0" x="0" y="0" width="300" height="600" opacity="0.1"/><rect fill="%232c5aa0" x="900" y="0" width="300" height="600" opacity="0.1"/><circle fill="%236b9bd1" cx="600" cy="300" r="150" opacity="0.3"/><rect fill="%23ffffff" x="450" y="250" width="300" height="100" rx="10" opacity="0.8"/><text x="600" y="310" font-family="Arial" font-size="24" text-anchor="middle" fill="%232c5aa0">COLLEGE CAMPUS</text></svg>');
+
+        background-size: cover, 400px, cover;
+        background-position: center, center, center;
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: #ff6b35;
+        color: white;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      .cta-button:hover {
+        background: #e55a2b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+      }
+
+      /* Section Styles */
+      section {
+        padding: 5rem 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #2c5aa0;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #ff6b35;
+        margin: 1rem auto;
+        border-radius: 2px;
+      }
+
+      /* College Info Section */
+      .college-info {
+        background: #f8fbff;
+      }
+
+      .info-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .info-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+      }
+
+      .info-text h3 {
+        color: #2c5aa0;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-image {
+        background: linear-gradient(135deg, #2c5aa0, #6b9bd1);
+        height: 300px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      /* Teachers Section */
+      .teachers {
+        background: white;
+      }
+
+      .teachers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .teacher-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .teacher-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: #2c5aa0;
+      }
+
+      .teacher-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2c5aa0, #6b9bd1);
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .teacher-photo img {
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        object-fit: contain;
+        background-color: #f0f0f0;
+      }
+
+      .teacher-card h3 {
+        color: #2c5aa0;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .teacher-card .designation {
+        color: #ff6b35;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .teacher-card .subject {
+        color: #666;
+      }
+
+      /* Students Section */
+      .students {
+        background: #f8fbff;
+      }
+
+      .students-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .student-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .student-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .student-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff6b35, #ff8a65);
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .student-photo img {
+        width: 100%;
+        height: 100px;
+        border-radius: 100%;
+        object-fit: contain;
+        background-color: #f0f0f0;
+      }
+
+      .student-card h3 {
+        color: #2c5aa0;
+        font-size: 1.2rem;
+      }
+      .student-card h4 {
+        color: #2c5aa0;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .student-card .course {
+        color: #666;
+        font-weight: 500;
+      }
+
+      /* Footer */
+      footer {
+        background: #2c5aa0;
+        color: white;
+        padding: 3rem 0 1rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #b8d4f0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section ul li a:hover {
+        color: #ff6b35;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid #4a6fa5;
+        color: #b8d4f0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: white;
+          flex-direction: column;
+          padding: 1rem;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .mobile-menu {
+          display: flex;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .info-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .teachers-grid,
+        .students-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .container {
+          padding: 0 1rem;
+        }
+
+        section {
+          padding: 3rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">WII CST 3RD</div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#teachers">Teachers</a></li>
+          <li><a href="#students">Students</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <h2>National Institute Of Engineering And Technology (NIET)</h2>
+        <p>
+          Empowering minds, shaping futures, and building tomorrow's leaders
+          through innovative education and cutting-edge research.
+        </p>
+      </div>
+    </section>
+
+    <!-- College Information Section -->
+    <section id="about" class="college-info">
+      <div class="container">
+        <h2 class="section-title">About Our Institute</h2>
+        <div class="info-content">
+          <div class="info-text">
+            <h3>Our History</h3>
+            <p>
+              Since 2009 National Institute of Engineering and Technology (NIET)
+              has been offering four years Diploma in Engineering course under
+              Bangladesh Technical Education Board (BTEB).
+            </p>
+
+            <h3>Vision & Mission</h3>
+            <p>
+              <strong>Vision:</strong> To be a leading institution in technical
+              education in Bangladesh, empowering students with world-class
+              skills, practical experience, and career opportunities to excel in
+              the modern engineering industry.
+            </p>
+            <p>
+              <strong>Mission:</strong> To provide quality Diploma in
+              Engineering education under Bangladesh Technical Education Board
+              (BTEB) since 2009. To promote skill development through industry
+              visits, competitions, workshops, and training programs supported
+              by the World Bank and Bangladesh Bank. To ensure financial support
+              through stipends and scholarships for deserving students. To
+              enhance students’ employability through dedicated job placement
+              services. To foster overall growth through co-curricular
+              activities such as sports, debates, and study tours.
+            </p>
+          </div>
+          <div class="info-image">
+            <div>
+              <h3>Excellence in Education</h3>
+              <p>17+ Years of Academic Excellence</p>
+              <p>5000+ Successful Students</p>
+              <p>50+ Expert Faculty Members</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="teachers">
+      <div class="container">
+        <h2 class="section-title">Honorable Teachers</h2>
+        <div class="teachers-grid">
+          <div class="teacher-card">
+            <div class="teacher-photo">
+              <img
+                src="528632885_573932459019441_7197570671814179634_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Umme Salma</h3>
+            <div class="designation">Principal</div>
+          </div>
+          <div class="teacher-card">
+            <div class="teacher-photo">
+              <img
+                src="531171027_1459262925222229_6451198130796737153_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Sayed Jubayer</h3>
+            <div class="designation">Vice Principal</div>
+          </div>
+          <div class="teacher-card">
+            <div class="teacher-photo">
+              <img
+                src="528886304_1274953524411745_3808659126255741216_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Md Shahid Miya</h3>
+            <div class="designation">
+              Engineer. Md Shahid Miya (DUET) C.S.E <br />
+              Department head
+            </div>
+          </div>
+          <div class="teacher-card">
+            <div class="teacher-photo">
+              <img
+                src="530731060_24420390594246872_1005821624668051234_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Abdur Rahman Jobair</h3>
+            <div class="designation">Assistant Professor</div>
+          </div>
+          <div class="teacher-card">
+            <div class="teacher-photo">
+              <img
+                src="527599038_1491475692296553_6475164550427355442_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Tafsirul Islam</h3>
+            <div class="designation">Assistant Professor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Students Section -->
+    <section id="students" class="students">
+      <div class="container">
+        <h2 class="section-title">Our Project Students</h2>
+        <div class="students-grid">
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="WhatsApp Image 2025-08-10 at 1.32.34 PM.jpeg" alt="" />
+            </div>
+            <h3>Mohaiminul Islam</h3>
+            <h4>Roll:861100</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="529303909_784216004081359_3716188691405437195_n.jpg" />
+            </div>
+            <h3>Thasan Rahman</h3>
+            <h4>Roll:861137</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="532233050_1502220204481251_2400826293277548864_n.jpg" />
+            </div>
+            <h3>Abir Alam</h3>
+            <h4>Roll:861128</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+
+          <div class="student-card">
+            <div class="student-photo">
+              <img
+                src="528302315_1495566948295417_2322639514571954037_n.jpg"
+                alt=""
+              />
+            </div>
+            <h3>Rakibul Hasan</h3>
+            <h4>Roll:861136</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="528640436_3073442362827979_5351964473403677276_n.jpg" />
+            </div>
+            <h3>Sumaiya Akter</h3>
+            <h4>Roll:861151</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="WhatsApp Image 2025-08-10 at 3.03.05 PM.jpeg" alt="" />
+            </div>
+            <h3>Mumtahina Ibnat Jemi</h3>
+            <h4>Roll:861143</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="529456360_1125406699469341_8857369044517914255_n.jpg" />
+            </div>
+            <h3>Shrabonti</h3>
+            <h4>Roll:861123</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="529445905_1064485372539100_4659109694950813533_n.jpg" />
+            </div>
+            <h3>Urmi Akter</h3>
+            <h4>Roll:861141</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+
+          <div class="student-card">
+            <div class="student-photo">
+              <img src="532210337_2168955336865335_6993593330067533527_n.jpg" />
+            </div>
+            <h3>Fatema Akter</h3>
+            <h4>Roll:861149</h4>
+            <div class="course">Computer Science Technology</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/niet.ac.bd">Facebook Page</a>
+              </li>
+              <li>
+                <a href="https://niet.ac.bd/welcome/index">Website link</a>
+              </li>
+              <li><a href="#research">Research</a></li>
+              <li><a href="#campus">Campus Life</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Departments</h3>
+            <ul>
+              <li><a href="#cse">Computer Science</a></li>
+              <li><a href="#eee">Electrical Engineering</a></li>
+              <li><a href="#mech">Mechanical Engineering</a></li>
+              <li><a href="#civil">Civil Engineering</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <ul>
+              <li>📍 NIET(Narayangonj) Rupshi,Rupgonj,Narayangonj</li>
+              <li>📞 +8801731006989</li>
+              <li>✉️ info@niet.edu.bd</li>
+              <li>🌐 niet.ac.bd/</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 Excellence Institute of Technology. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.getElementById("navLinks");
+
+      mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinkItems = document.querySelectorAll(".nav-links a");
+      navLinkItems.forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const offsetTop = target.offsetTop - 80; // Account for fixed nav
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to navbar
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(255, 255, 255, 0.98)";
+          nav.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.15)";
+        } else {
+          nav.style.background = "rgba(255, 255, 255, 0.95)";
+          nav.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        }
+      });
+
+      // Add fade-in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all cards for animation
+      document
+        .querySelectorAll(".teacher-card, .student-card")
+        .forEach((card) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(30px)";
+          card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+          observer.observe(card);
+        });
+    </script>
+  </body>
+</html>
